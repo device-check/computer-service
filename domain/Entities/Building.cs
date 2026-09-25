@@ -3,7 +3,7 @@
     public class Building
     {
         private Guid id_building = Guid.NewGuid();
-        private string BuildingName;
+        private string _buildingName;
 
         private Building()
         {
@@ -15,9 +15,26 @@
             SetName(buildingName);
         }
 
-        private void SetName(string buildingName)
+        public Guid GetId()
         {
-            throw new NotImplementedException();
+            return id_building;
+        }
+
+        public string GetName()
+        {
+            return _buildingName;
+        }
+
+        public void SetName(string buildingName)
+        {
+            // Pré-Contract
+            if (string.IsNullOrEmpty(buildingName))
+                throw new DomainException("Building name cannot be null or empty.");
+
+            // Domain constraint
+            string buildingNameUpperCase = buildingName.Trim().ToUpper();
+
+            _buildingName = buildingNameUpperCase;
         }
     }
 }

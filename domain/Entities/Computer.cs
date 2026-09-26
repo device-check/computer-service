@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace domain.Entities
 {
@@ -82,7 +83,7 @@ namespace domain.Entities
         private void SetIdSupport(Guid idSupport)
         {
             // Pré-contract
-            if (Guid.Empty == id_support)
+            if (Guid.Empty == idSupport)
                 throw new DomainException($"The computer must be linked a valid ID Support.");
 
             id_support = idSupport;
@@ -103,6 +104,12 @@ namespace domain.Entities
             // Pré-contract
             if (ipAddress is null)
                 throw new DomainException($"{nameof(_computerIpv4Address)} cannot be null.");
+            if (ipAddress.AddressFamily != AddressFamily.InterNetwork)
+                throw new DomainException($"{nameof(_computerIpv4Address)} must be an IPv4 address.");
+            if (IPAddress.IsLoopback(ipAddress))
+                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be a loopback address.");
+            if (ipAddress.Equals(IPAddress.Any))
+                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");
 
             _computerIpv4Address = ipAddress;
         }

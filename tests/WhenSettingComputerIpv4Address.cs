@@ -30,7 +30,7 @@ namespace tests
         [Theory]
         [InlineData("0.0.0.0")]
         [InlineData("127.0.0.1")]
-        public void WithInvalidIpv4AddressDontShouldThrowException(string computerInvalidIpv4Address)
+        public void WithInvalidIpv4AddressShouldThrowDomainException(string computerInvalidIpv4Address)
         {
             // Arrange
             PhysicalAddress computerValidMacAddress = PhysicalAddress.Parse("00-1A-2B-3C-4D-5E");
@@ -54,7 +54,7 @@ namespace tests
         [InlineData("192.168.255.0")]
         [InlineData("192.168.0.255")]
         [InlineData("192.168.0.0")]
-        public void WithValidIpv4AddressDontShouldThrowException(string computerValidIpv4Address)
+        public void WithValidIpv4AddressDontShouldThrowDomainException(string computerValidIpv4Address)
         {
             // Arrange
             PhysicalAddress computerValidMacAddress = PhysicalAddress.Parse("00-1A-2B-3C-4D-5E");

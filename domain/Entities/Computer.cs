@@ -74,7 +74,7 @@ namespace domain.Entities
         private void SetIdComputerType(Guid idComputerType)
         {
             // Pré-contract
-            if (Guid.Empty == id_support)
+            if (Guid.Empty == idComputerType)
                 throw new DomainException($"The computer must be linked a valid ID Computer Type.");
 
             id_computer_type = idComputerType;
@@ -92,7 +92,7 @@ namespace domain.Entities
         public void SetIdComputerPhysicalLocation(Guid idComputerPhysicalLocation)
         {
             // Pré-contract
-            if (Guid.Empty == id_support)
+            if (Guid.Empty == idComputerPhysicalLocation)
                 throw new DomainException($"The computer must be linked a valid ID Physical Location.");
 
             id_computer_physical_location = idComputerPhysicalLocation;
@@ -109,7 +109,8 @@ namespace domain.Entities
             if (IPAddress.IsLoopback(ipAddress))
                 throw new DomainException($"{nameof(_computerIpv4Address)} cannot be a loopback address.");
             if (ipAddress.Equals(IPAddress.Any))
-                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");
+                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");        
+
 
             _computerIpv4Address = ipAddress;
         }
@@ -119,6 +120,9 @@ namespace domain.Entities
             // Pré-contract
             if (physicalAddress is null)
                 throw new DomainException($"{nameof(_computerMacAddress)} cannot be null.");
+
+            if (physicalAddress.GetAddressBytes().Length != 6)
+                throw new DomainException($"{nameof(_computerMacAddress)} must contain exactly 6 bytes.");
 
             _computerMacAddress = physicalAddress;
         }

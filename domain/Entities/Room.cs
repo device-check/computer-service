@@ -1,4 +1,6 @@
-﻿namespace domain.Entities
+﻿using domain.Exceptions;
+
+namespace domain.Entities
 {
     public class Room
     {

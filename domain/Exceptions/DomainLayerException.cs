@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace domain
+namespace domain.Exceptions
 {
-    public class DomainException : Exception
+    public class DomainLayerException : Exception
     {   
 
-        public DomainException(string? message) : base(message)
+        public DomainLayerException(string? message) : base(message)
         {
         }
     }

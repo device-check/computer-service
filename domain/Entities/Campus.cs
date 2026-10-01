@@ -35,7 +35,7 @@ namespace domain.Entities
         {
             // Pré-contract           
             if (string.IsNullOrEmpty(campusName))
-                throw new DomainException($"Campus name cannot be null or empty.");
+                throw new DomainLayerException($"Campus name cannot be null or empty.");
 
             // Domain constraint
             string campusNameUpperCase = campusName.Trim().ToUpper();

@@ -28,7 +28,7 @@
         {
             // Pré-contract
             if (string.IsNullOrEmpty(roomName))
-                throw new DomainException("Room name cannot be null or empty.");
+                throw new DomainLayerException("Room name cannot be null or empty.");
 
             // Domain constraint
             string roomNameUpperCase = roomName.Trim().ToUpper();

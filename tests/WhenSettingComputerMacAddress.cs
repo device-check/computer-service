@@ -1,5 +1,5 @@
-﻿using domain;
-using domain.Entities;
+﻿using domain.Entities;
+using domain.Exceptions;
 using System.Net;
 using System.Net.NetworkInformation;
 
@@ -16,7 +16,7 @@ namespace tests
             Guid valid_id = Guid.NewGuid();
 
             // Act + Assert
-            Assert.Throws<DomainException>(() =>
+            Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
                     valid_id,
@@ -51,7 +51,7 @@ namespace tests
             });
 
             // Assert
-            Assert.True(!(result is DomainException));            
+            Assert.True(!(result is DomainLayerException));            
         }       
     }
 }

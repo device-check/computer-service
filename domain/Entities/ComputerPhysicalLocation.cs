@@ -48,7 +48,7 @@
         {
             // Pré-contract
             if (Guid.Empty == idCampus)
-                throw new DomainException($"Campus id must be valid.");
+                throw new DomainLayerException($"Campus id must be valid.");
 
             id_campus = idCampus;
         }
@@ -57,7 +57,7 @@
         {
             // Pré-contract
             if (Guid.Empty == idBuilding)
-                throw new DomainException($"Building id must be valid.");
+                throw new DomainLayerException($"Building id must be valid.");
 
             id_building = idBuilding;
         }
@@ -66,7 +66,7 @@
         {
             // Pré-contract
             if (Guid.Empty == idRoom)
-                throw new DomainException($"Room id must be valid.");
+                throw new DomainLayerException($"Room id must be valid.");
 
             id_room = idRoom;
         }

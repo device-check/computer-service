@@ -1,5 +1,5 @@
-﻿using domain;
-using domain.Entities;
+﻿using domain.Entities;
+using domain.Exceptions;
 
 namespace tests
 {
@@ -13,7 +13,7 @@ namespace tests
             string invalidCampusName = null;
 
             // Act + Assert
-            Assert.Throws<DomainException>(() =>
+            Assert.Throws<DomainLayerException>(() =>
             {
                 Campus campus = new(invalidCampusName);
             });

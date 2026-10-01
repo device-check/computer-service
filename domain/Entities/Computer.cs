@@ -75,7 +75,7 @@ namespace domain.Entities
         {
             // Pré-contract
             if (Guid.Empty == idComputerType)
-                throw new DomainException($"The computer must be linked a valid ID Computer Type.");
+                throw new DomainLayerException($"The computer must be linked a valid ID Computer Type.");
 
             id_computer_type = idComputerType;
         }
@@ -84,7 +84,7 @@ namespace domain.Entities
         {
             // Pré-contract
             if (Guid.Empty == idSupport)
-                throw new DomainException($"The computer must be linked a valid ID Support.");
+                throw new DomainLayerException($"The computer must be linked a valid ID Support.");
 
             id_support = idSupport;
         }
@@ -93,7 +93,7 @@ namespace domain.Entities
         {
             // Pré-contract
             if (Guid.Empty == idComputerPhysicalLocation)
-                throw new DomainException($"The computer must be linked a valid ID Physical Location.");
+                throw new DomainLayerException($"The computer must be linked a valid ID Physical Location.");
 
             id_computer_physical_location = idComputerPhysicalLocation;
         }
@@ -103,13 +103,13 @@ namespace domain.Entities
         {
             // Pré-contract
             if (ipAddress is null)
-                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be null.");
+                throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be null.");
             if (ipAddress.AddressFamily != AddressFamily.InterNetwork)
-                throw new DomainException($"{nameof(_computerIpv4Address)} must be an IPv4 address.");
+                throw new DomainLayerException($"{nameof(_computerIpv4Address)} must be an IPv4 address.");
             if (IPAddress.IsLoopback(ipAddress))
-                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be a loopback address.");
+                throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be a loopback address.");
             if (ipAddress.Equals(IPAddress.Any))
-                throw new DomainException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");        
+                throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");        
 
 
             _computerIpv4Address = ipAddress;
@@ -119,10 +119,10 @@ namespace domain.Entities
         {
             // Pré-contract
             if (physicalAddress is null)
-                throw new DomainException($"{nameof(_computerMacAddress)} cannot be null.");
+                throw new DomainLayerException($"{nameof(_computerMacAddress)} cannot be null.");
 
             if (physicalAddress.GetAddressBytes().Length != 6)
-                throw new DomainException($"{nameof(_computerMacAddress)} must contain exactly 6 bytes.");
+                throw new DomainLayerException($"{nameof(_computerMacAddress)} must contain exactly 6 bytes.");
 
             _computerMacAddress = physicalAddress;
         }

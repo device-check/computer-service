@@ -1,5 +1,5 @@
-﻿using domain;
-using domain.Entities;
+﻿using domain.Entities;
+using domain.Exceptions;
 using System.Net;
 using System.Net.NetworkInformation;
 
@@ -19,7 +19,7 @@ namespace tests
 
 
             // Act + Assert
-            Assert.Throws<DomainException>(() =>
+            Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
                     valid_foreign_key,
@@ -42,7 +42,7 @@ namespace tests
 
 
             // Act + Assert
-            Assert.Throws<DomainException>(() =>
+            Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
                     invalid_foreign_key,
@@ -65,7 +65,7 @@ namespace tests
 
 
             // Act + Assert
-            Assert.Throws<DomainException>(() =>
+            Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
                     valid_foreign_key,

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "application", "application\application.csproj", "{71953A7F-8ACD-4BA6-A3CA-F3F31201DFAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interface-adapters", "interface-adapters\interface-adapters.csproj", "{5360D749-46D6-4CA8-8DA6-850D36CC2BEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{71953A7F-8ACD-4BA6-A3CA-F3F31201DFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71953A7F-8ACD-4BA6-A3CA-F3F31201DFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71953A7F-8ACD-4BA6-A3CA-F3F31201DFAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5360D749-46D6-4CA8-8DA6-850D36CC2BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5360D749-46D6-4CA8-8DA6-850D36CC2BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5360D749-46D6-4CA8-8DA6-850D36CC2BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5360D749-46D6-4CA8-8DA6-850D36CC2BEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

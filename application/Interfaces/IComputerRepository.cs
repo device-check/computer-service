@@ -8,7 +8,7 @@ namespace application.Interfaces
 
         Task<Computer?> GetByIdAsync(Guid id_computer);
 
-        Task<IEnumerable<Computer>> GetAllAsync();
+        Task<IEnumerable<Computer>> GetAsync(int page, int pageSize);
 
         Task UpdateAsync(Computer computer);
 

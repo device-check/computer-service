@@ -13,11 +13,14 @@ namespace application.UseCases
             _computerRepository = computerRepository;
         }
 
-        public async Task ExecuteAsync(Computer computer)
+        public async Task ExecuteAsync(Guid id_computer)
         {
-            // Pré-contract
-            if (!await _computerRepository.ExistsAsync(computer))
-                throw new ApplicationLayerException("Computer don't finded to be deleted.");
+            // Pré-contract            
+            if (Guid.Empty == id_computer)
+                throw new ApplicationLayerException("Id computer cannot be null to be deleted.");           
+            var computer = await _computerRepository.GetByIdAsync(id_computer);
+            if (computer is null)
+                throw new ApplicationLayerException("Computer not founded to be deleted.");
 
             await _computerRepository.DeleteAsync(computer);
 

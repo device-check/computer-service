@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 
 namespace domain.Entities
 {
@@ -110,7 +111,11 @@ namespace domain.Entities
             if (IPAddress.IsLoopback(ipAddress))
                 throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be a loopback address.");
             if (ipAddress.Equals(IPAddress.Any))
-                throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");        
+                throw new DomainLayerException($"{nameof(_computerIpv4Address)} cannot be 0.0.0.0.");
+            //const string ipv4Pattern = @"^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$";
+            //if (!Regex.IsMatch(ipAddress.ToString(), ipv4Pattern))
+            //    throw new DomainLayerException(
+            //        $"{nameof(_computerIpv4Address)} must be a valid IPv4 address in dotted decimal notation.");
 
 
             _computerIpv4Address = ipAddress;

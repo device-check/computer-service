@@ -17,9 +17,9 @@ namespace application.UseCases
             return await _computerRepository.GetByIdAsync(id_computer);
         }
 
-        public async Task<IEnumerable<Computer>> ExecuteAsync()
+        public async Task<IEnumerable<Computer>> ExecuteAsync(int page, int pageSize)
         {
-            return await _computerRepository.GetAllAsync();
+            return await _computerRepository.GetAsync(page, pageSize);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace tests
                     valid_id,
                     valid_id,
                     valid_id,
+                    valid_id,
                     computerInvalidMacAddress,
                     computerValidIpv4Address);
             });
@@ -43,6 +44,7 @@ namespace tests
             var result = Record.Exception(() =>
             {
                 Computer computer = new(
+                    valid_id,
                     valid_id,
                     valid_id,
                     valid_id,

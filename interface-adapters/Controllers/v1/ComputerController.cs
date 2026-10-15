@@ -1,4 +1,4 @@
-﻿using application.UseCases;
+﻿using application.UseCases.ComputerUseCases;
 using Asp.Versioning;
 using domain.Entities;
 using interface_adapters.Dtos.Computer;
@@ -14,15 +14,17 @@ namespace interface_adapters.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ComputerController : ControllerBase
     {
+        private readonly GetComputerCountUseCase _getComputerCountUseCase;
         private readonly GetComputerUseCase _getComputerUseCase;
         private readonly AddComputerUseCase _addComputerUseCase;
         private readonly DeleteComputerUseCase _deleteComputerUseCase;
 
-        public ComputerController(GetComputerUseCase getComputerUseCase, AddComputerUseCase addComputerUseCase, DeleteComputerUseCase deleteComputerUseCase)
+        public ComputerController(GetComputerUseCase getComputerUseCase, AddComputerUseCase addComputerUseCase, DeleteComputerUseCase deleteComputerUseCase, GetComputerCountUseCase getComputerCountUseCase)
         {
             _getComputerUseCase = getComputerUseCase;
             _addComputerUseCase = addComputerUseCase;
             _deleteComputerUseCase = deleteComputerUseCase;
+            _getComputerCountUseCase = getComputerCountUseCase;
         }
 
         [HttpGet]
@@ -39,16 +41,17 @@ namespace interface_adapters.Controllers.v1
                 ComputerType = c.GetComputerType().GetName(),
                 ComputerPhysicalLocation = new()
                 {
-                    Campus = new() { Name=c.GetComputerPhysicalLocation().GetCampus().GetName() },
-                    Building = new() { Name=c.GetComputerPhysicalLocation().GetBuilding().GetName()},
+                    Campus = new() { Name = c.GetComputerPhysicalLocation().GetCampus().GetName() },
+                    Building = new() { Name = c.GetComputerPhysicalLocation().GetBuilding().GetName() },
                     Floor = c.GetComputerPhysicalLocation().GetFloor(),
-                    Room = new() { Name=c.GetComputerPhysicalLocation().GetRoom().GetName()}
+                    Room = new() { Name = c.GetComputerPhysicalLocation().GetRoom().GetName() }
                 }
-            });
+            }).ToList();
 
-            var computersCount = computersReadDto.Count();
+            int computersCount = await _getComputerCountUseCase.ExecuteAsync();
+            int totalPages = (int)Math.Ceiling((double) computersCount / pageSize);
 
-            return Ok(new ApiResponse<IEnumerable<ComputerReadDto>>()
+            return Ok(new ApiResponse<List<ComputerReadDto>>()
             {
                 Data = computersReadDto,
                 MetaData = new()
@@ -58,9 +61,9 @@ namespace interface_adapters.Controllers.v1
                         CurrentPage = page,
                         PageSize = pageSize,
                         TotalItems = computersCount,
-                        TotalPages = (computersCount/pageSize)
+                        TotalPages = totalPages
                     }
-                }               
+                }
             });
         }
 
@@ -68,7 +71,10 @@ namespace interface_adapters.Controllers.v1
         public async Task<ActionResult<ApiResponse<ComputerReadDto>>> ListByIdAsync(Guid id)
         {
             var computer = await _getComputerUseCase.ExecuteAsync(id);
-            var computerReadDto = computer is null ? null : new ComputerReadDto
+            if (computer is null)
+                return NotFound();
+
+            var computerReadDto = new ComputerReadDto
             {
                 ComputerIpv4Address = computer.GetIpv4Address().ToString(),
                 ComputerMacAddress = computer.GetMacAddress().ToString(),
@@ -91,7 +97,7 @@ namespace interface_adapters.Controllers.v1
                     Pagination = new()
                     {
                         CurrentPage = 1,
-                        TotalItems = computer is null ? 0 : 1,
+                        TotalItems = 1,
                         PageSize = 1,
                         TotalPages = 1
                     }                    
@@ -106,14 +112,16 @@ namespace interface_adapters.Controllers.v1
                 computerCreateDto.IdComputerType,
                 computerCreateDto.IdSupport,
                 computerCreateDto.IdComputerPhysicalLocation,
+                computerCreateDto.IdComputerPowerStatus,
                 PhysicalAddress.Parse(computerCreateDto.ComputerMacAddress),
                 IPAddress.Parse(computerCreateDto.ComputerIpv4Address)
                 );
 
             await _addComputerUseCase.ExecuteAsync(computer);
-            var computerReadDto = await ListByIdAsync(computer.GetId());
+            //var computerReadDto = await ListByIdAsync(computer.GetId());
+            var computerReadDto = await _getComputerUseCase.ExecuteAsync(computer.GetId());
 
-            return CreatedAtAction(nameof(ListByIdAsync), new { id = computer.GetId() }, computerReadDto);
+            return CreatedAtRoute(nameof(ListByIdAsync), new { id = computer.GetId() }, computerReadDto);
         }
 
         [HttpDelete("{id:Guid}")]

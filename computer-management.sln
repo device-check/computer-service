@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interface-adapters", "inter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "infrastructure", "infrastructure\infrastructure.csproj", "{DBF3AE25-913A-4874-868D-A8BE43D13E94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dependency-injection", "dependency-injection\dependency-injection.csproj", "{A83F786E-6BBB-417C-A88A-7A536C81C44B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{DBF3AE25-913A-4874-868D-A8BE43D13E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBF3AE25-913A-4874-868D-A8BE43D13E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF3AE25-913A-4874-868D-A8BE43D13E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83F786E-6BBB-417C-A88A-7A536C81C44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83F786E-6BBB-417C-A88A-7A536C81C44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83F786E-6BBB-417C-A88A-7A536C81C44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83F786E-6BBB-417C-A88A-7A536C81C44B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

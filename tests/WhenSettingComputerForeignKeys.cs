@@ -23,6 +23,7 @@ namespace tests
             {
                 Computer computer = new(
                     valid_foreign_key,
+                    valid_foreign_key,
                     invalid_foreign_key,
                     valid_foreign_key,
                     validMacAddress,
@@ -45,6 +46,7 @@ namespace tests
             Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
+                    valid_foreign_key,
                     invalid_foreign_key,
                     valid_foreign_key,
                     valid_foreign_key,
@@ -68,6 +70,7 @@ namespace tests
             Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
+                    valid_foreign_key,
                     valid_foreign_key,
                     valid_foreign_key,
                     invalid_foreign_key,

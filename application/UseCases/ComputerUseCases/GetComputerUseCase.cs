@@ -1,7 +1,7 @@
 ﻿using application.Interfaces;
 using domain.Entities;
 
-namespace application.UseCases
+namespace application.UseCases.ComputerUseCases
 {
     public class GetComputerUseCase
     {
@@ -17,7 +17,7 @@ namespace application.UseCases
             return await _computerRepository.GetByIdAsync(id_computer);
         }
 
-        public async Task<IEnumerable<Computer>> ExecuteAsync(int page, int pageSize)
+        public async Task<List<Computer>> ExecuteAsync(int page, int pageSize)
         {
             return await _computerRepository.GetAsync(page, pageSize);
         }

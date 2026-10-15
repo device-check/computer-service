@@ -2,7 +2,7 @@
 using application.Interfaces;
 using domain.Entities;
 
-namespace application.UseCases
+namespace application.UseCases.ComputerUseCases
 {
     public class AddComputerUseCase
     {

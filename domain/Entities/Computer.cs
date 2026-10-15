@@ -28,12 +28,14 @@ namespace domain.Entities
             Guid id_computer_type, 
             Guid id_support, 
             Guid id_computer_physical_location, 
+            Guid id_computer_power_status,
             PhysicalAddress computerMacAddress,
             IPAddress computerIpv4Address)
         {
             SetIdSupport(id_support);
             SetIdComputerType(id_computer_type);
             SetIdComputerPhysicalLocation(id_computer_physical_location);
+            SetIdComputerPowerStatus(id_computer_power_status);
             SetMacAddress(computerMacAddress);
             SetIpv4Address(computerIpv4Address);
         }
@@ -131,6 +133,15 @@ namespace domain.Entities
                 throw new DomainLayerException($"{nameof(_computerMacAddress)} must contain exactly 6 bytes.");
 
             _computerMacAddress = physicalAddress;
+        }
+
+        public void SetIdComputerPowerStatus(Guid id_computer_power_status)
+        {
+            // Pré-contract
+            if (Guid.Empty == id_computer_power_status)
+                throw new DomainLayerException("The computer must be linked a valid ID computer power status.");
+
+            this.id_computer_power_status = id_computer_power_status;
         }
     }
 }

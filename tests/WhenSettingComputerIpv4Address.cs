@@ -22,6 +22,7 @@ namespace tests
                     valid_id,
                     valid_id,
                     valid_id,
+                    valid_id,
                     computerValidMacAddress,
                     computerIpv4Address);
             });
@@ -40,6 +41,7 @@ namespace tests
             Assert.Throws<DomainLayerException>(() =>
             {
                 Computer computer = new(
+                    valid_id,
                     valid_id,
                     valid_id,
                     valid_id,
@@ -64,6 +66,7 @@ namespace tests
             var result = Record.Exception(() =>
             {
                 Computer computer = new(
+                    valid_id,
                     valid_id,
                     valid_id,
                     valid_id,

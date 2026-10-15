@@ -4,15 +4,15 @@ namespace domain.Entities
 {
     public class ComputerPhysicalLocation
     {
-        private Guid id_computer_physical_location;
+        private Guid id_computer_physical_location = Guid.NewGuid();
         private Guid id_campus;
         private Guid id_building;
         private int _floorNumber;
         private Guid id_room;
 
-        private Campus _campus;
-        private Building _building;
-        private Room _room;
+        private Campus? _campus;
+        private Building? _building;
+        private Room? _room;
 
         private ComputerPhysicalLocation()
         {
@@ -25,6 +25,11 @@ namespace domain.Entities
             SetIdBuilding(idBuilding);
             _floorNumber = floorNumber;
             SetIdRoom(idRoom);
+        }
+
+        public Guid GetId()
+        {
+            return id_computer_physical_location;
         }
 
         public Campus GetCampus()

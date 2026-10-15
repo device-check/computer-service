@@ -5,15 +5,15 @@ namespace interface_adapters.Dtos.ComputerPhysicalLocation
     public class ComputerPhysicalLocationCreateDto
     {
         [Required(ErrorMessage="Id campus is required.")]
-        public Guid IdCampus;
+        public Guid IdCampus { get; set; }
 
         [Required(ErrorMessage = "Id building is required.")]
-        public Guid IdBuilding;
+        public Guid IdBuilding { get; set; }
 
         [Required(ErrorMessage = "Floor number is required.")]
-        public int FloorNumber;
+        public int FloorNumber { get; set; }
 
         [Required(ErrorMessage = "Id room is required.")]
-        public Guid IdRoom;
+        public Guid IdRoom { get; set; }
     }
 }

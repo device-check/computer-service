@@ -8,11 +8,12 @@ namespace application.Interfaces
 
         Task<Computer?> GetByIdAsync(Guid id_computer);
 
-        Task<IEnumerable<Computer>> GetAsync(int page, int pageSize);
+        Task<List<Computer>> GetAsync(int page, int pageSize);
 
         Task UpdateAsync(Computer computer);
 
         Task DeleteAsync(Computer computer);        
         Task<bool> ExistsAsync(Computer computer);
+        Task<int> CountAsync();
     }
 }

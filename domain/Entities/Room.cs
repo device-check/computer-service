@@ -5,7 +5,7 @@ namespace domain.Entities
     public class Room
     {
         private Guid id_room = Guid.NewGuid();
-        private string RoomName;
+        private string _roomName;
 
         private Room()
         {
@@ -23,7 +23,7 @@ namespace domain.Entities
 
         public string GetName()
         {
-            return RoomName;
+            return _roomName;
         }
 
         public void SetName(string roomName)
@@ -35,7 +35,7 @@ namespace domain.Entities
             // Domain constraint
             string roomNameUpperCase = roomName.Trim().ToUpper();
 
-            RoomName = roomNameUpperCase;
+            _roomName = roomNameUpperCase;
         }
     }
 }

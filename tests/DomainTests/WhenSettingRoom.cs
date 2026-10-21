@@ -1,7 +1,7 @@
 ﻿using domain.Entities;
 using domain.Exceptions;
 
-namespace tests
+namespace tests.DomainTests
 {
     public class WhenSettingRoom
     {

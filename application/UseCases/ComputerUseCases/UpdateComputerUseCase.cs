@@ -17,12 +17,9 @@ namespace application.UseCases.ComputerUseCases
         {
             // Pre-contract
             if (computer is null)
-                throw new ApplicationLayerException("To be updated, computer cannot be null");
-            if (!await _computerRepository.ExistsAsync(computer))
-                throw new ApplicationLayerException("Computer don't exists to be updated.");
+                throw new ApplicationLayerException("To be updated, computer cannot be null");            
 
             await _computerRepository.UpdateAsync(computer); 
-
         }
     }
 }

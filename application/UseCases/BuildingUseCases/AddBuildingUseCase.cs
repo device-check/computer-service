@@ -6,11 +6,11 @@ namespace application.UseCases.BuildingUseCases
 {
     public class AddBuildingUseCase
     {
-        private readonly IBuildingRepository _buildingUseCase;
+        private readonly IBuildingRepository _buildingRepository;
 
         public AddBuildingUseCase(IBuildingRepository buildingUseCase)
         {
-            _buildingUseCase = buildingUseCase;
+            _buildingRepository = buildingUseCase;
         }
 
         public async Task ExecuteAsync(Building building)
@@ -19,7 +19,7 @@ namespace application.UseCases.BuildingUseCases
             if (building is null)
                 throw new ApplicationLayerException("Cannot adding a null building.");
 
-            await _buildingUseCase.AddAsync(building);
+            await _buildingRepository.AddAsync(building);
         }
     }
 }

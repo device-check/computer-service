@@ -1,10 +1,22 @@
 ﻿using domain.Entities;
 using domain.Exceptions;
 
-namespace tests
+namespace tests.DomainTests
 {
     public class WhenSettingBuilding
     {
+        [Fact]
+        public void WithEmptyBuildingNameShouldThrowDomainException()
+        {
+            // Arrange
+            string invalidBuildingName = string.Empty;
+
+            // Act + Assert
+            Assert.Throws<DomainLayerException>(() =>
+            {
+                Building building = new(invalidBuildingName);
+            });
+        }
 
         [Fact]
         public void WithNullBuildingNameShouldThrowDomainException()
@@ -31,5 +43,20 @@ namespace tests
             // Assert
             Assert.True(building.GetName() == validBuildingName.ToUpper());
         }
+
+        [Fact]
+        public void WithValidBuildingNameShouldGenerateAnId()
+        {
+            // Arrange
+            string validBuildingName = "Building A";
+
+            // Act
+            Building building = new(validBuildingName);
+
+            // Assert
+            Assert.NotEqual(Guid.Empty, building.GetId());
+        }
+
+
     }
 }

@@ -3,7 +3,7 @@ using domain.Exceptions;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace tests
+namespace tests.DomainTests
 {
     public class WhenSettingComputerMacAddress
     {

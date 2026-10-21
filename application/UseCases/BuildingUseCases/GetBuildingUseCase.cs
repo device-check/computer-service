@@ -15,6 +15,12 @@ namespace application.UseCases.BuildingUseCases
 
         public async Task<List<Building>> ExecuteAsync(int page, int pageSize)
         {
+            // pre-contract
+            if (page == 0 || page < 0)
+                throw new ApplicationLayerException("Page number must be greater than zero.");
+            if (pageSize == 0 || pageSize < 0)
+                throw new ApplicationLayerException("Page size number must be greater than zero.");
+
             return await _buildingRepository.GetAsync(page, pageSize);
         }
 

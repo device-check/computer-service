@@ -6,6 +6,6 @@ namespace interface_adapters.Dtos.Room
     {
 
         [Required(ErrorMessage="Room name is required.s")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 }

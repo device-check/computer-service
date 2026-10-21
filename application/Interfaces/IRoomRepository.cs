@@ -8,6 +8,6 @@ namespace application.Interfaces
         Task<int> CountAsync();
         Task DeleteAsync(Room room);
         Task<List<Room>> GetAsync(int page, int pageSize);
-        Task<Room> GetByIdAsync(Guid id);
+        Task<Room?> GetByIdAsync(Guid id);
     }
 }

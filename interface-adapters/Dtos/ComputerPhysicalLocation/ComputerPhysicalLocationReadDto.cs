@@ -6,9 +6,9 @@ namespace interface_adapters.Dtos.ComputerPhysicalLocation
 {
     public class ComputerPhysicalLocationReadDto
     {
-        public CampusReadDto Campus { get; set; }
-        public BuildingReadDto Building { get; set; }
-        public int Floor { get; set; }
-        public RoomReadDto Room { get; set; }
+        public required CampusReadDto Campus { get; set; }
+        public required BuildingReadDto Building { get; set; }
+        public required int Floor { get; set; }
+        public required RoomReadDto Room { get; set; }
     }
 }

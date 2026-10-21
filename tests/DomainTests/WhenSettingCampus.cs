@@ -1,10 +1,22 @@
 ﻿using domain.Entities;
 using domain.Exceptions;
 
-namespace tests
+namespace tests.DomainTests
 {
     public class WhenSettingCampus
     {
+        [Fact]
+        public void WithEmptyCampusNameShouldThrowDomainException()
+        {
+            // Arrange
+            string invalidCampusName = string.Empty;
+
+            // Act + Assert
+            Assert.Throws<DomainLayerException>(() =>
+            {
+                Campus campus = new(invalidCampusName);
+            });
+        }
 
         [Fact]
         public void WithNullCampusNameShouldThrowDomainException()
@@ -30,6 +42,19 @@ namespace tests
 
             // Assert
             Assert.True(campus.GetName() == validCampusName.ToUpper());
+        }
+
+        [Fact]
+        public void WithValidCampusNameShouldGenerateAnId()
+        {
+            // Arrange
+            string validCampusName = "South City";
+
+            // Act
+            Campus campus = new(validCampusName);
+
+            // Assert
+            Assert.NotEqual(Guid.Empty, campus.GetId());
         }
     }
 }

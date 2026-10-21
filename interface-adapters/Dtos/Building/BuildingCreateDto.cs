@@ -5,6 +5,6 @@ namespace interface_adapters.Dtos.Building
     public class BuildingCreateDto
     {
         [Required(ErrorMessage="Building name is required.")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 }

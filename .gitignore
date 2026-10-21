@@ -2,6 +2,9 @@
 # .NET / Visual Studio
 # =========================
 
+# SonarQube
+.sonarqube/
+
 # Build output
 [Bb]in/
 [Oo]bj/

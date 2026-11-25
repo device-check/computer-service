@@ -51,7 +51,7 @@ namespace tests.Helpers
                 ficticiousIpv4);
         }
 
-        public Task UpdateAsync(Computer computer)
+        public Task UpdateAsync(Guid id, Guid? id_support, Guid? id_computer_physical_location, Guid? id_computer_type, Guid? id_computer_power_status, PhysicalAddress? computerMacAddress, IPAddress? computerIpv4Address)
         {
             return Task.CompletedTask;
         }

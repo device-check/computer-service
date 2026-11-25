@@ -13,13 +13,13 @@ namespace application.UseCases.ComputerPhysicalLocationUseCases
             _computerPhysicalLocationRepository = computerPhysicalLocationRepository;
         }
 
-        public async Task ExecuteAsync(ComputerPhysicalLocation computerPhysicalLocation)
+        public async Task ExecuteAsync(Guid id)
         {
             // pre-contract
-            if (computerPhysicalLocation is null)
-                throw new ApplicationLayerException("Cannot delete a null computer physical location.");
+            if (Guid.Empty == id)
+                throw new ApplicationLayerException("Cannot delete a computer physical location with invalid ID.");
 
-            await _computerPhysicalLocationRepository.DeleteAsync(computerPhysicalLocation);
+            await _computerPhysicalLocationRepository.DeleteAsync(id);
         }
     }
 }

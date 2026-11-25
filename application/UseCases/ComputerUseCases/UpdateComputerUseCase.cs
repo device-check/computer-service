@@ -1,6 +1,8 @@
 ﻿using application.Exceptions;
 using application.Interfaces;
 using domain.Entities;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace application.UseCases.ComputerUseCases
 {
@@ -13,13 +15,41 @@ namespace application.UseCases.ComputerUseCases
             _computerRepository = computerRepository;
         }
 
-        public async Task ExecuteAsync(Computer computer)
+        public async Task ExecuteAsync(
+            Guid id, 
+            Guid? id_support, 
+            Guid? id_computer_physical_location, 
+            Guid? id_computer_type, 
+            Guid? id_computer_power_status, 
+            PhysicalAddress? computerMacAddress, 
+            IPAddress? computerIpv4Address)
         {
-            // Pre-contract
-            if (computer is null)
-                throw new ApplicationLayerException("To be updated, computer cannot be null");            
+            // pre-contract
 
-            await _computerRepository.UpdateAsync(computer); 
-        }
+            if (id == Guid.Empty)
+                throw new ApplicationLayerException(
+                    "Computer ID cannot be empty.");
+
+            if (
+                id_support is null &&
+                id_computer_physical_location is null &&
+                id_computer_type is null &&
+                id_computer_power_status is null &&
+                computerMacAddress is null &&
+                computerIpv4Address is null
+            )
+                throw new ApplicationLayerException(
+                    "At least one attribute must be provided for updating the computer.");
+
+            await _computerRepository.UpdateAsync(
+                id,
+                id_support,
+                id_computer_physical_location,
+                id_computer_type,
+                id_computer_power_status,
+                computerMacAddress,
+                computerIpv4Address);
+
+        }        
     }
 }

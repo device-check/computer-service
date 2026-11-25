@@ -18,13 +18,15 @@ namespace interface_adapters.Controllers.v1
         private readonly GetComputerUseCase _getComputerUseCase;
         private readonly AddComputerUseCase _addComputerUseCase;
         private readonly DeleteComputerUseCase _deleteComputerUseCase;
+        private readonly UpdateComputerUseCase _updateComputerUseCase;
 
-        public ComputerController(GetComputerUseCase getComputerUseCase, AddComputerUseCase addComputerUseCase, DeleteComputerUseCase deleteComputerUseCase, GetComputerCountUseCase getComputerCountUseCase)
+        public ComputerController(GetComputerUseCase getComputerUseCase, AddComputerUseCase addComputerUseCase, DeleteComputerUseCase deleteComputerUseCase, GetComputerCountUseCase getComputerCountUseCase, UpdateComputerUseCase updateComputerUseCase)
         {
             _getComputerUseCase = getComputerUseCase;
             _addComputerUseCase = addComputerUseCase;
             _deleteComputerUseCase = deleteComputerUseCase;
             _getComputerCountUseCase = getComputerCountUseCase;
+            _updateComputerUseCase = updateComputerUseCase;
         }
 
         [HttpGet]
@@ -122,6 +124,30 @@ namespace interface_adapters.Controllers.v1
             var computerReadDto = await _getComputerUseCase.ExecuteAsync(computer.GetId());
 
             return CreatedAtRoute(nameof(ListByIdAsync), new { id = computer.GetId() }, computerReadDto);
+        }
+
+        [HttpPatch("{id:Guid}")]
+        public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] ComputerUpdateDto computerUpdateDto)
+        {
+            PhysicalAddress? computerMacAddress = null;
+            IPAddress? computerIpv4Address = null;
+
+            if (computerUpdateDto.ComputerMacAddress is not null)
+                computerMacAddress = PhysicalAddress.Parse(computerUpdateDto.ComputerMacAddress);
+
+            if (computerUpdateDto.ComputerIpv4Address is not null)
+                computerIpv4Address = IPAddress.Parse(computerUpdateDto.ComputerIpv4Address);
+
+            await _updateComputerUseCase.ExecuteAsync(
+                id: id,
+                id_support: computerUpdateDto.IdSupport,
+                id_computer_physical_location: computerUpdateDto.IdComputerPhysicalLocation,
+                id_computer_type: computerUpdateDto.IdComputerType,
+                id_computer_power_status: computerUpdateDto.IdComputerPowerStatus,
+                computerMacAddress: computerMacAddress,
+                computerIpv4Address: computerIpv4Address);
+
+            return NoContent();
         }
 
         [HttpDelete("{id:Guid}")]

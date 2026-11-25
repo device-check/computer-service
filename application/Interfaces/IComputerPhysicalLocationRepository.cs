@@ -6,8 +6,9 @@ namespace application.Interfaces
     {
         Task AddAsync(ComputerPhysicalLocation computerPhysicalLocation);
         Task<int> CountAsync();
-        Task DeleteAsync(ComputerPhysicalLocation computerPhysicalLocation);
+        Task DeleteAsync(Guid id);
         Task<List<ComputerPhysicalLocation>> GetAsync(int page, int pageSize);
         Task<ComputerPhysicalLocation> GetByIdAsync(Guid id);
+        Task UpdateAsync(Guid id, Guid? id_campus, Guid? id_building, int? floorNumber, Guid? id_room);
     }
 }

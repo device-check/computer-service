@@ -1,7 +1,6 @@
 ﻿namespace infrastructure.Exceptions
-{
-    [Serializable]
-    internal class InfrastructureLayerException : Exception
+{    
+    public class InfrastructureLayerException : Exception
     {
         public InfrastructureLayerException()
         {

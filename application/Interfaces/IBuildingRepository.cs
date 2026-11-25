@@ -9,5 +9,6 @@ namespace application.Interfaces
         Task DeleteAsync(Building building);
         Task<List<Building>> GetAsync(int page, int pageSize);
         Task<Building?> GetByIdAsync(Guid id);
+        Task UpdateAsync(Guid id, Building buildingModified);
     }
 }

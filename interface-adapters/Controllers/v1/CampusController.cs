@@ -16,13 +16,15 @@ namespace interface_adapters.Controllers.v1
         private readonly GetCampusUseCase _getCampusUseCase;
         private readonly AddCampusUseCase _addCampusUseCase;
         private readonly DeleteCampusUseCase _deleteCampusUseCase;
+        private readonly UpdateCampusUseCase _updateCampusUseCase;
 
-        public CampusController(GetCampusUseCase getCampusUseCase, AddCampusUseCase addCampusUseCase, DeleteCampusUseCase removeCampusUseCase, GetCampusCountUseCase getCampusCountUseCase)
+        public CampusController(GetCampusUseCase getCampusUseCase, AddCampusUseCase addCampusUseCase, DeleteCampusUseCase removeCampusUseCase, GetCampusCountUseCase getCampusCountUseCase, UpdateCampusUseCase updateCampusUseCase)
         {
             _getCampusUseCase = getCampusUseCase;
             _addCampusUseCase = addCampusUseCase;
             _deleteCampusUseCase = removeCampusUseCase;
             _getCampusCountUseCase = getCampusCountUseCase;
+            _updateCampusUseCase = updateCampusUseCase;
         }
 
         [HttpGet]
@@ -100,6 +102,15 @@ namespace interface_adapters.Controllers.v1
                     id = campus.GetId()
                 }, 
                 campusReadDto);            
+        }
+
+        [HttpPatch("{id:Guid}")]
+        public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] CampusUpdateDto campusUpdateDto)
+        {
+            var campusModified = new Campus(campusUpdateDto.Name);
+            await _updateCampusUseCase.ExecuteAsync(id, campusModified);
+
+            return NoContent();
         }
 
         [HttpDelete("{id:Guid}")]

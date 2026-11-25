@@ -38,6 +38,7 @@ namespace dependency_injection
             serviceCollection.AddScoped<DeleteComputerPhysicalLocationUseCase>();
             serviceCollection.AddScoped<AddComputerPhysicalLocationUseCase>();
             serviceCollection.AddScoped<GetComputerPhysicalLocationUseCase>();
+            serviceCollection.AddScoped<UpdateComputerPhysicalLocationUseCase>();
             
 
             // Campus Use Cases
@@ -45,15 +46,18 @@ namespace dependency_injection
             serviceCollection.AddScoped<DeleteCampusUseCase>();
             serviceCollection.AddScoped<AddCampusUseCase>();
             serviceCollection.AddScoped<GetCampusUseCase>();
+            serviceCollection.AddScoped<UpdateCampusUseCase>();
             
+
 
             // Building Use Cases
             serviceCollection.AddScoped<GetBuildingCountUseCase>();
             serviceCollection.AddScoped<DeleteBuildingUseCase>();
             serviceCollection.AddScoped<AddBuildingUseCase>();
             serviceCollection.AddScoped<GetBuildingUseCase>();
-            
-            
+            serviceCollection.AddScoped<UpdateBuildingUseCase>();            
+
+
 
             // Room Use Cases
             serviceCollection.AddScoped<GetRoomCountUseCase>();

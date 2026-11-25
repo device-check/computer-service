@@ -55,5 +55,19 @@ namespace infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_building") == id);
         }
+
+        public async Task UpdateAsync(Guid id, Building buildingModified)
+        {
+            var oldBuilding = await _context.Building
+                .FirstOrDefaultAsync(b => EF.Property<Guid>(b, "id_building") == id);
+
+            //pre-contract
+            if (oldBuilding is null)
+                throw new InfrastructureLayerException("Cannot update a nonexistent building.");
+
+            oldBuilding.SetName(buildingModified.GetName());
+            
+            await _context.SaveChangesAsync();
+        }
     }
 }

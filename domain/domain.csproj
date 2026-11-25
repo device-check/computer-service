@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="device-check.shared-kernel" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>

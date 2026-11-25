@@ -17,39 +17,22 @@ namespace tests.ApplicationTests.ComputerUseCaseTests
         }
 
         [Fact]
-        public async Task WithNullComputerShouldThrowApplicationLayerException()
+        public async Task WhenDoesntExistComputerModificationShouldThrowApplicationLayerException()
         {
             // Arrange
             var useCase = new UpdateComputerUseCase(
                 _computerRepositoryDummy);
+            Guid valid_computer_id = Guid.NewGuid();
 
             // Act + Assert
             var exception = await Assert.ThrowsAsync<ApplicationLayerException>(
-                async () => await useCase.ExecuteAsync(null!));
-        }
-
-        [Fact]
-        public async Task WithValidComputerShouldNotThrowException()
-        {
-            // Arrange
-            Guid valid_id = Guid.NewGuid();
-            PhysicalAddress validMacAddress = PhysicalAddress.Parse("DC-A6-32-98-76-54");
-            IPAddress validIpAdress = IPAddress.Parse("192.168.0.0");
-            var computer = new Computer(
-                valid_id,
-                valid_id,
-                valid_id,
-                valid_id,
-                validMacAddress,
-                validIpAdress);            
-
-            var useCase = new UpdateComputerUseCase(_computerRepositoryDummy);
-
-            // Act
-            var exception = await Record.ExceptionAsync(async () => await useCase.ExecuteAsync(computer));
-
-            // Assert
-            Assert.Null(exception);
-        }
+                async () => await useCase.ExecuteAsync(valid_computer_id,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null));
+        }        
     }
 }

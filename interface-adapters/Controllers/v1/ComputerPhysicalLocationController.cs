@@ -17,17 +17,20 @@ namespace interface_adapters.Controllers.v1
         private readonly GetComputerPhysicalLocationUseCase _getComputerPhysicalLocationUseCase;
         private readonly DeleteComputerPhysicalLocationUseCase _deleteComputerPhysicalLocationUseCase;
         private readonly GetComputerPhysicalLocationCountUseCase _getComputerPhysicalLocationCountUseCase;
+        private readonly UpdateComputerPhysicalLocationUseCase _updateComputerPhysicalLocationUseCase;
 
         public ComputerPhysicalLocationController(
             AddComputerPhysicalLocationUseCase addComputerPhysicalLocationUseCase,
             GetComputerPhysicalLocationUseCase getComputerPhysicalLocationUseCase,
             DeleteComputerPhysicalLocationUseCase deleteComputerPhysicalLocationUseCase,
-            GetComputerPhysicalLocationCountUseCase getComputerPhysicalLocationCountUseCase)
+            GetComputerPhysicalLocationCountUseCase getComputerPhysicalLocationCountUseCase,
+            UpdateComputerPhysicalLocationUseCase updateComputerPhysicalLocationUseCase)
         {
             _addComputerPhysicalLocationUseCase = addComputerPhysicalLocationUseCase;
             _getComputerPhysicalLocationUseCase = getComputerPhysicalLocationUseCase;
             _deleteComputerPhysicalLocationUseCase = deleteComputerPhysicalLocationUseCase;
             _getComputerPhysicalLocationCountUseCase = getComputerPhysicalLocationCountUseCase;
+            _updateComputerPhysicalLocationUseCase = updateComputerPhysicalLocationUseCase;
         }
 
         [HttpGet]
@@ -121,6 +124,27 @@ namespace interface_adapters.Controllers.v1
                     id = computerPhysicalLocation.GetId()
                 },
                 computerPhysicalLocationReadDto);
+        }
+
+        [HttpPatch("{id:Guid}")]
+        public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] ComputerPhysicalLocationUpdateDto updateDto)
+        {
+            await _updateComputerPhysicalLocationUseCase.ExecuteAsync(
+                id,
+                updateDto.IdCampus,
+                updateDto.IdBuilding,
+                updateDto.FloorNumber,
+                updateDto.IdRoom);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:Guid}")]
+        public async Task<ActionResult> DeleteAsync(Guid id)
+        {
+            await _deleteComputerPhysicalLocationUseCase.ExecuteAsync(id);
+
+            return NoContent();
         }
     }
 }

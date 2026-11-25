@@ -77,5 +77,20 @@ namespace domain.Entities
 
             id_room = idRoom;
         }
+
+        public void ApplyUpdate(Guid? id_campus, Guid? id_building, int? floorNumber, Guid? id_room)
+        {
+            if (id_campus is not null)
+                SetIdCampus(id_campus.Value);
+
+            if (id_building is not null)
+                SetIdBuilding(id_building.Value);
+
+            if (floorNumber is not null)
+                _floorNumber = floorNumber.Value;
+
+            if (id_room is not null)
+                SetIdRoom(id_room.Value);
+        }
     }
 }

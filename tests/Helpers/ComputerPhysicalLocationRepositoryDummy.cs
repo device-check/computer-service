@@ -21,6 +21,11 @@ namespace tests.Helpers
             return Task.CompletedTask;
         }
 
+        public Task DeleteAsync(Guid id)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task<List<ComputerPhysicalLocation>> GetAsync(
             int page,
             int pageSize)
@@ -32,6 +37,11 @@ namespace tests.Helpers
         public Task<ComputerPhysicalLocation?> GetByIdAsync(Guid id)
         {
             return Task.FromResult<ComputerPhysicalLocation?>(null);
+        }
+
+        public Task UpdateAsync(Guid id, Guid? id_campus, Guid? id_building, int? floorNumber, Guid? id_room)
+        {
+            return Task.CompletedTask;
         }
     }
 }

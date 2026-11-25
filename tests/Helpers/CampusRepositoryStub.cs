@@ -29,5 +29,10 @@ namespace tests.Helpers
         {
             return null;
         }
+
+        public Task UpdateAsync(Guid id, Campus campusModified)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

@@ -143,5 +143,32 @@ namespace domain.Entities
 
             this.id_computer_power_status = id_computer_power_status;
         }
+
+        public void ApplyUpdate(
+            Guid? id_computer_type=null, 
+            Guid? id_support=null,
+            Guid? id_computer_physical_location=null,
+            Guid? id_computer_power_status=null,
+            PhysicalAddress? computerMacAddress= null,
+            IPAddress? computerIpv4Address = null)
+        {
+            if (id_computer_type is not null)
+                SetIdComputerType(id_computer_type.Value);
+
+            if (id_support is not null)
+                SetIdSupport(id_support.Value);
+
+            if (id_computer_physical_location is not null)
+                SetIdComputerPhysicalLocation(id_computer_physical_location.Value);
+
+            if (id_computer_power_status is not null)
+                SetIdComputerPowerStatus(id_computer_power_status.Value);
+
+            if (computerMacAddress is not null)
+                SetMacAddress(computerMacAddress);
+
+            if (computerIpv4Address is not null)
+                SetIpv4Address(computerIpv4Address);
+        }
     }
 }

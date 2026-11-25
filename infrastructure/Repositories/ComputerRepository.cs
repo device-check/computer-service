@@ -3,6 +3,7 @@ using domain.Entities;
 using infrastructure.Data;
 using infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using System.Net.NetworkInformation;
 
 namespace infrastructure.Repositories
@@ -93,19 +94,30 @@ namespace infrastructure.Repositories
                 .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_computer") == id_computer);
 
             return computer;            
-        }
+        }        
 
-        public async Task UpdateAsync(Computer computer)
+        public async Task UpdateAsync(
+            Guid id, 
+            Guid? id_support,
+            Guid? id_computer_physical_location,
+            Guid? id_computer_type, 
+            Guid? id_computer_power_status, 
+            PhysicalAddress? computerMacAddress, 
+            IPAddress? computerIpv4Address)
         {
-            if (computer is null)
-                throw new InfrastructureLayerException(
-                    "Computer cannot be null to be updated.");
+            var oldComputer = await _context.Computer
+                .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_computer") == id);
 
-            var entry = _context.Entry(computer);
+            if (oldComputer is null)
+                throw new InfrastructureLayerException("Cannot update a nonexistent computer");
 
-            if (entry.State == EntityState.Detached)
-                throw new InfrastructureLayerException(
-                    "Computer must be tracked by the DbContext to be updated.");
+            oldComputer.ApplyUpdate(
+                id_computer_type: id_computer_type,
+                id_support: id_support,
+                id_computer_physical_location: id_computer_physical_location,
+                id_computer_power_status: id_computer_power_status,
+                computerMacAddress: computerMacAddress,
+                computerIpv4Address: computerIpv4Address);
 
             await _context.SaveChangesAsync();
         }

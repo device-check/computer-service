@@ -20,10 +20,10 @@ namespace tests.ApplicationTests.ComputerPhysicalLocationUseCaseTests
         }
 
         [Fact]
-        public async Task WithNullComputerPhysicalLocationShouldThrowApplicationLayerException()
+        public async Task WithEmptyIdComputerPhysicalLocationShouldThrowApplicationLayerException()
         {
-            // Arrange
-            ComputerPhysicalLocation nullComputerPhysicalLocation = null;
+            // Arrange          
+            Guid empty_id_computer_physical_location = Guid.Empty;
 
             var useCase = new DeleteComputerPhysicalLocationUseCase(
                 _computerPhysicalLocationRepositoryDummy);
@@ -32,15 +32,15 @@ namespace tests.ApplicationTests.ComputerPhysicalLocationUseCaseTests
             var exception =
                 await Assert.ThrowsAsync<ApplicationLayerException>(
                     () => useCase.ExecuteAsync(
-                        nullComputerPhysicalLocation));
+                        empty_id_computer_physical_location));
 
             Assert.Equal(
-                "Cannot delete a null computer physical location.",
+                "Cannot delete a computer physical location with invalid ID.",
                 exception.Message);
         }                
 
         [Fact]
-        public async Task WithNotNullComputerPhysicalLocationShouldNotThrowException()
+        public async Task WithNotEmptyIdComputerPhysicalLocationShouldNotThrowException()
         {
             // Arrange
             Guid valid_id = Guid.NewGuid();
@@ -52,7 +52,7 @@ namespace tests.ApplicationTests.ComputerPhysicalLocationUseCaseTests
             // Act
             var exceptionRecorder = await Record.ExceptionAsync(async() => 
             {
-                await useCase.ExecuteAsync(computerPhysicalLocation);
+                await useCase.ExecuteAsync(computerPhysicalLocation.GetId());
             });
 
             // Assert

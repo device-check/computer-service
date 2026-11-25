@@ -33,15 +33,15 @@ namespace infrastructure.Repositories
                 .CountAsync();
         }
 
-        public async Task DeleteAsync(
-            ComputerPhysicalLocation computerPhysicalLocation)
+        public async Task DeleteAsync(Guid id)
         {
+            var computerPhysicalLocation = await _context.ComputerPhysicalLocation
+                .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_computer_physical_location") == id);
+
             if (computerPhysicalLocation is null)
-                throw new InfrastructureLayerException("Cannot delete a null computer physical location.");
+                throw new InfrastructureLayerException("Cannot delete a nonexistent computer physical location");
 
-            _context.ComputerPhysicalLocation
-                .Remove(computerPhysicalLocation);
-
+            _context.Remove<ComputerPhysicalLocation>(computerPhysicalLocation);
             await _context.SaveChangesAsync();
         }
 
@@ -73,6 +73,24 @@ namespace infrastructure.Repositories
                 .Include("_building")
                 .Include("_room")
                 .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_computer_physical_location") == id);
+        }
+
+        public async Task UpdateAsync(
+            Guid id, 
+            Guid? id_campus,
+            Guid? id_building, 
+            int? floorNumber, 
+            Guid? id_room)
+        {
+            var oldComputerPhysicalLocation = await _context.ComputerPhysicalLocation
+                .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_computer_physical_location") == id);
+
+            if (oldComputerPhysicalLocation is null)
+                throw new InfrastructureLayerException("Cannot update a nonexistent computer physical location.");
+
+            oldComputerPhysicalLocation.ApplyUpdate(id_campus, id_building, floorNumber, id_room);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -64,5 +64,17 @@ namespace infrastructure.Repositories
         .FirstOrDefaultAsync(
             c => EF.Property<Guid>(c, "id_campus") == id);
         }
+
+        public async Task UpdateAsync(Guid id, Campus campusModified)
+        {
+            var oldCampus = await _context.Campus
+                .FirstOrDefaultAsync(c => EF.Property<Guid>(c, "id_campus") == id);
+
+            if (oldCampus is null)
+                throw new InfrastructureLayerException("Cannot update a nonexistent campus.");
+
+            oldCampus.SetName(campusModified.GetName());
+            await _context.SaveChangesAsync();
+        }
     }
 }

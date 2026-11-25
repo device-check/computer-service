@@ -34,5 +34,10 @@ namespace tests.Helpers
         {
             return null;
         }
+
+        public Task UpdateAsync(Guid id, Building buildingModified)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

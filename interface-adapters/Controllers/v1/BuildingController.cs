@@ -3,6 +3,7 @@ using Asp.Versioning;
 using domain.Entities;
 using interface_adapters.Dtos.Building;
 using interface_adapters.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace interface_adapters.Controllers.v1
@@ -16,13 +17,15 @@ namespace interface_adapters.Controllers.v1
         private readonly AddBuildingUseCase _addBuildingUseCase;
         private readonly GetBuildingUseCase _getBuildingUseCase;
         private readonly DeleteBuildingUseCase _deleteBuildingUseCase;
+        private readonly UpdateBuildingUseCase _updateBuildingUseCase;
 
-        public BuildingController(AddBuildingUseCase addBuildingUseCase, GetBuildingUseCase getBuildingUseCase, DeleteBuildingUseCase deleteBuildingUseCase, GetBuildingCountUseCase getBuildingCountUseCase)
+        public BuildingController(AddBuildingUseCase addBuildingUseCase, GetBuildingUseCase getBuildingUseCase, DeleteBuildingUseCase deleteBuildingUseCase, GetBuildingCountUseCase getBuildingCountUseCase, UpdateBuildingUseCase updateBuildingUseCase)
         {
             _addBuildingUseCase = addBuildingUseCase;
             _getBuildingUseCase = getBuildingUseCase;
             _deleteBuildingUseCase = deleteBuildingUseCase;
             _getBuildingCountUseCase = getBuildingCountUseCase;
+            _updateBuildingUseCase = updateBuildingUseCase;
         }
 
         [HttpGet]
@@ -101,6 +104,15 @@ namespace interface_adapters.Controllers.v1
                     id = building.GetId()
                 },
                 buildingReadDto);
+        }
+
+        [HttpPatch("{id:Guid}")]
+        public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] BuildingUpdateDto buildingUpdateDto)
+        {
+            var buildingModified = new Building(buildingUpdateDto.Name);
+            await _updateBuildingUseCase.ExecuteAsync(id, buildingModified);
+
+            return NoContent();
         }
 
         [HttpDelete("{id:Guid}")]

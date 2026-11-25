@@ -3,7 +3,6 @@ using Asp.Versioning;
 using domain.Entities;
 using interface_adapters.Dtos.Building;
 using interface_adapters.Responses;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace interface_adapters.Controllers.v1

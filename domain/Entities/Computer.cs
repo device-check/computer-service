@@ -1,8 +1,7 @@
-﻿using domain.Exceptions;
+﻿using shared_kernel.Exceptions.DomainLayerExceptions;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
-using System.Text.RegularExpressions;
 
 namespace domain.Entities
 {

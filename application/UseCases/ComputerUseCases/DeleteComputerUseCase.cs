@@ -1,6 +1,5 @@
-﻿using application.Exceptions;
-using application.Interfaces;
-using domain.Entities;
+﻿using application.Interfaces;
+using shared_kernel.Exceptions.ApplicationLayerExceptions;
 
 namespace application.UseCases.ComputerUseCases
 {

@@ -1,4 +1,4 @@
-﻿using application.Exceptions;
+﻿using shared_kernel.Exceptions.ApplicationLayerExceptions;
 using application.UseCases.ComputerPhysicalLocationUseCases;
 using domain.Entities;
 using tests.Helpers;

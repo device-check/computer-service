@@ -1,5 +1,5 @@
-﻿using application.Exceptions;
-using application.UseCases.BuildingUseCases;
+﻿using application.UseCases.BuildingUseCases;
+using shared_kernel.Exceptions.ApplicationLayerExceptions;
 using tests.Helpers;
 
 namespace tests.ApplicationTests.BuildingUseCaseTests

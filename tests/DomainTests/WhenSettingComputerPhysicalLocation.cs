@@ -1,5 +1,5 @@
 ﻿using domain.Entities;
-using domain.Exceptions;
+using shared_kernel.Exceptions.DomainLayerExceptions;
 
 namespace tests.DomainTests
 {

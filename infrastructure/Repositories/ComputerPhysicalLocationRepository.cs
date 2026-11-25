@@ -1,8 +1,8 @@
 ﻿using application.Interfaces;
 using domain.Entities;
 using infrastructure.Data;
-using infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using shared_kernel.Exceptions.InfrastructureLayerExceptions;
 
 namespace infrastructure.Repositories
 {

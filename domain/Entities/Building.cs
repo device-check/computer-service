@@ -1,4 +1,4 @@
-﻿using domain.Exceptions;
+﻿using shared_kernel.Exceptions.DomainLayerExceptions;
 
 namespace domain.Entities
 {

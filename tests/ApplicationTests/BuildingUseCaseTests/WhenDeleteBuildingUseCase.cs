@@ -1,8 +1,7 @@
 ﻿using domain.Entities;
-using application;
-using application.Exceptions;
 using application.UseCases.BuildingUseCases;
 using tests.Helpers;
+using shared_kernel.Exceptions.ApplicationLayerExceptions;
 
 namespace tests.ApplicationTests.BuildingUseCaseTests
 {

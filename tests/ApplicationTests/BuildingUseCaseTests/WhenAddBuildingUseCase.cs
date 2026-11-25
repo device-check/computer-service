@@ -1,6 +1,6 @@
 ﻿using domain.Entities;
 using application;
-using application.Exceptions;
+using shared_kernel.Exceptions.ApplicationLayerExceptions;
 using application.UseCases.BuildingUseCases;
 using tests.Helpers;
 

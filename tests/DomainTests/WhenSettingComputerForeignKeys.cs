@@ -1,5 +1,5 @@
 ﻿using domain.Entities;
-using domain.Exceptions;
+using shared_kernel.Exceptions.DomainLayerExceptions;
 using System.Net;
 using System.Net.NetworkInformation;
 
